@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>异常件处理</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page exception-page">
+        <div class="top-bar">
+            <button class="btn btn-back" id="backBtn">&lt; 返回</button>
+            <h2>异常件处理</h2>
+            <div style="width:48px;"></div>
+        </div>
+        <div class="exception-form">
+            <div class="form-group">
+                <label for="barcodeInput">条码</label>
+                <input type="text" id="barcodeInput" placeholder="请扫描或输入条码">
+            </div>
+            <button class="btn btn-primary btn-block" id="submitExceptionBtn">提交</button>
+        </div>
+        <div class="exception-result" id="exceptionResult">
+            <p>等待提交...</p>
+        </div>
+    </div>
+    <script src="data/mockData.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/exception-handle.js"></script>
+</body>
+</html>
