@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>任务分拣</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page task-sort-page">
+        <!-- 顶部栏 -->
+        <div class="top-bar">
+            <button class="btn btn-back" id="backBtn">&lt; 返回</button>
+            <h2>任务分拣</h2>
+            <div style="width:48px;"></div>
+        </div>
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <div class="form-group inline">
+                <label for="channelSelect">通道</label>
+                <select id="channelSelect">
+                    <option value="0">全部通道</option>
+                    <option value="1">1通道</option>
+                    <option value="2">2通道</option>
+                    <option value="3">3通道</option>
+                    <option value="4">4通道</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="queryBtn">查询</button>
+        </div>
+        <!-- 任务卡片列表 -->
+        <div class="task-list" id="taskList">
+            <!-- 由 JS 动态渲染 -->
+        </div>
+    </div>
+
+    <!-- 绑箱弹窗（全屏） -->
+    <div class="modal-overlay fullscreen-modal" id="bindModal">
+        <div class="modal-content fullscreen-content">
+            <div class="modal-header fullscreen-header">
+                <button class="btn btn-back" data-close="bindModal">&lt; 返回</button>
+                <h3>绑箱</h3>
+                <div style="width:48px;"></div>
+            </div>
+            <div class="modal-body fullscreen-body">
+                <div class="form-group row-group">
+                    <label>波次号</label>
+                    <span id="bindWaveNo">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>门店编码</label>
+                    <span id="bindStoreCode">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>门店名称</label>
+                    <span id="bindStoreName">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>格口</label>
+                    <span id="bindGrid">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label for="bindContainerCode">容器码</label>
+                    <input type="text" id="bindContainerCode" placeholder="请扫描或输入容器码" autofocus>
+                </div>
+            </div>
+            <div class="modal-footer fullscreen-footer">
+                <button class="btn btn-primary btn-block" id="bindConfirmBtn">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 封箱弹窗（全屏） -->
+    <div class="modal-overlay fullscreen-modal" id="sealModal">
+        <div class="modal-content fullscreen-content">
+            <div class="modal-header fullscreen-header">
+                <button class="btn btn-back" data-close="sealModal">&lt; 返回</button>
+                <h3>封箱</h3>
+                <div style="width:48px;"></div>
+            </div>
+            <div class="modal-body fullscreen-body">
+                <div class="form-group row-group">
+                    <label>波次号</label>
+                    <span id="sealWaveNo">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>门店编码</label>
+                    <span id="sealStoreCode">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>门店名称</label>
+                    <span id="sealStoreName">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label>格口</label>
+                    <span id="sealGrid">--</span>
+                </div>
+                <div class="form-group row-group">
+                    <label for="sealSign">封箱签</label>
+                    <input type="text" id="sealSign" placeholder="请扫描或输入封箱签" autofocus>
+                </div>
+            </div>
+            <div class="modal-footer fullscreen-footer">
+                <button class="btn btn-primary btn-block" id="sealConfirmBtn">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 进度弹窗（全屏） -->
+    <div class="modal-overlay fullscreen-modal" id="progressModal">
+        <div class="modal-content fullscreen-content wide-fullscreen">
+            <div class="modal-header fullscreen-header">
+                <button class="btn btn-back" data-close="progressModal">&lt; 返回</button>
+                <h3>进度详情</h3>
+                <div style="width:48px;"></div>
+            </div>
+            <div class="modal-body fullscreen-body">
+                <div class="progress-summary fullscreen-summary">
+                    <div class="form-group row-group"><label>波次号</label><span id="progWaveNo">--</span></div>
+                    <div class="form-group row-group"><label>门店编码</label><span id="progStoreCode">--</span></div>
+                    <div class="form-group row-group"><label>门店名称</label><span id="progStoreName">--</span></div>
+                    <div class="form-group row-group"><label>格口</label><span id="progGrid">--</span></div>
+                    <div class="form-group row-group"><label>门店总数</label><span id="progStoreTotal">--</span></div>
+                    <div class="form-group row-group"><label>分拣总数</label><span id="progSortTotal">--</span></div>
+                </div>
+                <table class="progress-table">
+                    <thead>
+                        <tr><th>商品编码</th><th>商品名称</th><th>要货数</th><th>分拣数</th></tr>
+                    </thead>
+                    <tbody id="progressTableBody">
+                        <!-- 动态渲染 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/mockData.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/task-sort.js"></script>
+</body>
+</html>
